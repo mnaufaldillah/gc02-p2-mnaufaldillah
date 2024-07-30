@@ -8,3 +8,8 @@
     height: 333px;
     overflow-clip-margin: context-box;
 }
+
+.johnLewis-image-large {
+    aspect-ratio: auto;
+    overflow-clip-margin: content-box;
+}

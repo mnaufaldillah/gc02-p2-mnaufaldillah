@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 function FormLogin() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
+    const [errors, setErrors] = useState('');
     const navigate = useNavigate();
 
     async function handlerLogin(event) {
@@ -26,8 +26,8 @@ function FormLogin() {
             localStorage.setItem('access_token', data.acces_token);
             navigate('/admin/products')
         } catch (error) {
-            console.log(error);
-            setError(error.response.data.message)
+            setErrors(error.response.data.message)
+            console.log(errors);
         }
     }
 

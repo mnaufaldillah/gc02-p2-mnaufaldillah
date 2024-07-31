@@ -3,8 +3,37 @@ import Header from "../../components/header/Header";
 import SideBarPublic from "../../components/navbar/SideBarPublic";
 import SelectSortPublic from "../../components/select/SelectSortPublic";
 import CardProduct from "../../components/card/CardProduct";
+import { useEffect, useState } from "react";
+import axios from "../../config/axiosinstance";
 
 function HomePublic() {
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [errors, setErrors] = useState('');
+
+    async function fetchPublicProducts() {
+        try {
+            setLoading(true);
+
+            const { data } = await axios({
+                url: '/pub/products',
+                method: 'GET',
+            });
+            // console.log(data.products);
+            setProducts(data.products);
+        } catch (error) {
+            setErrors(error.response.data.message)
+            console.log(errors);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        fetchPublicProducts();
+        // console.log('Public Product Mounted');
+    }, [])
+
     return (
         <div className="bg-body-secondary" style={{ height: '100vh' }}>
             <div className="container">
@@ -19,11 +48,11 @@ function HomePublic() {
                         <SelectSortPublic />
 
                         <div className="row p-3">
-                            <CardProduct />
-                            <CardProduct />
-                            <CardProduct />
-                            <CardProduct />
-                            <CardProduct />
+                            {products.map((item) => {
+                                return (
+                                    <CardProduct dataDetail={item} key={item.id}/>
+                                )
+                            })}
                         </div>
                     </div>
                 </div>

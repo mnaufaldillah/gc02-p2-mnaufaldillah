@@ -1,6 +1,5 @@
 import { useState } from "react";
 import axios from "../../config/axiosinstance";
-import PropTypes from 'prop-types';
 import { useNavigate } from "react-router-dom";
 
 function FormLogin() {

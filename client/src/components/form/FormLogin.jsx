@@ -18,7 +18,7 @@ function FormLogin() {
                     </div>
                     <div className="mb-3 text-center">
                         <button type="submit" className="btn btn-dark">
-                        Submit
+                            Login
                         </button>
                     </div>
                 </form>

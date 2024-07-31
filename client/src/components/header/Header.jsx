@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 function Header({title}) {
     return (
-        <div className="mb-3 text-center formula1-bold">
+        <div className="mb-3 p-3 text-center formula1-bold">
             <h1>{title}</h1>
         </div>
     )

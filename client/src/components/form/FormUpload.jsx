@@ -14,7 +14,7 @@ function FormUpload() {
                     </div>
                     <div className="mb-3 text-center">
                         <button type="submit" className="btn btn-dark">
-                        Submit
+                            Submit
                         </button>
                     </div>
                 </form>

@@ -28,15 +28,23 @@ function Button({commandType}) {
     if(commandType === `DetailProduct`) {
         return (
             <button className="btn btn-primary w-100">
-                Hapus
+                Detail
             </button>
         )
     }
 
-    if(commandType === `Contact`) {
+    if(commandType === `ContactLarge`) {
         return (
             <button className="btn btn-outline-primary w-100">
-                Hapus
+                Hubungi Toko
+            </button>
+        )
+    }
+
+    if(commandType === `ContactMedium`) {
+        return (
+            <button className="btn btn-outline-primary">
+                Hubungi Toko
             </button>
         )
     }

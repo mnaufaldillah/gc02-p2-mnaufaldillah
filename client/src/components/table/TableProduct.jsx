@@ -1,4 +1,4 @@
-import Button from "./Button"
+import Button from "../button/Button"
 
 function TableProduct() {
     const products = [
@@ -38,7 +38,7 @@ function TableProduct() {
                     {products.map((item, index) => {
                         return (
                             <tr key={item.id}>
-                                <td>{index}</td>
+                                <td>{index + 1}</td>
                                 <td>{item.name}</td>
                                 <td>{item.price}</td>
                                 <td>{item.stock}</td>
@@ -47,10 +47,10 @@ function TableProduct() {
                                 <td>{item.User.name}</td>
                                 <td className="justify-content-between">
                                     <a href="">
-                                        <Button></Button>
+                                        <Button commandType={`EditProduct`}/>
                                     </a>
                                     <a href="">
-                                        <Button></Button>
+                                        <Button commandType={`DeleteProduct`}/>
                                     </a>
                                 </td>
                             </tr>

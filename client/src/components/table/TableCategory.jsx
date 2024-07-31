@@ -20,7 +20,7 @@ function TableCategory() {
                     {categories.map((item, index) => {
                         return (
                             <tr key={item.id}>
-                                <td>{index}</td>
+                                <td>{index + 1}</td>
                                 <td>{item.name}</td>
                             </tr>
                         )

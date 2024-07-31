@@ -1,19 +1,21 @@
 import FormLogin from "../../components/form/FormLogin";
 import Header from "../../components/header/Header";
-import NavBar from "../../components/navbar/NavBar";
+import PropTypes from 'prop-types';
 
-function LoginAdmin() {
+function LoginAdmin({ setPage }) {
     return (
         <div className="bg-body-secondary">
-            <NavBar />
-            
             <div className="container">
                 <Header title={`Selamat Datang di Icon Laptop Store CMS`} />
 
-                <FormLogin />
+                <FormLogin setPage={setPage} />
             </div>
         </div>
     )
+}
+
+LoginAdmin.propTypes = {
+    setPage: PropTypes.func,
 }
 
 export default LoginAdmin;

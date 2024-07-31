@@ -4,7 +4,7 @@ import CardProductDetail from "../../components/card/CardProductDetail";
 
 function ProductDetail() {
     return (
-        <div className="bg-body-secondary">
+        <div className="bg-body-secondary" style={{ height: '100vh' }}>
             <div className="container">
                 <Header title={`Icon Laptop`} />
 

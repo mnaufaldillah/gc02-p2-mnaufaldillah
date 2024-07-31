@@ -4,7 +4,7 @@ import Header from "../../components/header/Header";
 
 function UploadImageAdmin() {
     return (
-        <div className="bg-body-secondary">
+        <div className="bg-body-secondary" style={{ height: '100vh' }}>
             <div className="container">
                 <Header title={`Upload Gambar`} />
 

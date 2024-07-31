@@ -1,27 +1,35 @@
 import { useState } from "react";
 import axios from "../../config/axiosinstance";
 import PropTypes from 'prop-types';
+import { useNavigate } from "react-router-dom";
 
-function FormLogin({ setPage }) {
+function FormLogin() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     async function handlerLogin(event) {
-        event.preventDefault();
+        try {
+            event.preventDefault();
 
-        console.log(email, password);
+            const { data } = await axios({
+                url: '/login',
+                method: 'POST',
+                data: {
+                    email, 
+                    password
+                }
+            })
 
-        const { data } = await axios({
-            url: '/login',
-            method: 'POST',
-            data: {
-                email, 
-                password
-            }
-        })
+            console.log(data.acces_token);
 
-        localStorage.setItem('access_token', data.acces_token);
-        setPage('home');
+            localStorage.setItem('access_token', data.acces_token);
+            navigate('/admin/products')
+        } catch (error) {
+            console.log(error);
+            setError(error.response.data.message)
+        }
     }
 
     return (
@@ -59,10 +67,6 @@ function FormLogin({ setPage }) {
             </div>
         </div>
     )
-}
-
-FormLogin.propTypes = {
-    setPage: PropTypes.func,
 }
 
 

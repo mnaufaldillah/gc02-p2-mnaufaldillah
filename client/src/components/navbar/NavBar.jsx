@@ -1,10 +1,19 @@
+import { Link, useNavigate } from "react-router-dom";
+
 function NavBar() {
+    const navigate = useNavigate();
+
+    function handlerLogout() {
+        localStorage.clear();
+        navigate('/login')
+    }
+
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary formula1-regular">
             <div className="container-fluid">
-                <a className="navbar-brand" href="#">
+                <Link to='/admin/products' className="navbar-brand">
                     ICMS
-                </a>
+                </Link>
                 <button
                     className="navbar-toggler"
                     type="button"
@@ -19,19 +28,24 @@ function NavBar() {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="#">
+                            <Link to='/admin/products' className="nav-link active">
                                 Produk
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">
+                            <Link to='/admin/products/create' className="nav-link">
                                 Buat Produk Baru
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">
+                            <Link to='/admin/add-user' className="nav-link">
                                 Kategori
-                            </a>
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <button onClick={handlerLogout} className="nav-link">
+                                Logout
+                            </button>
                         </li>
                     </ul>
                 </div>

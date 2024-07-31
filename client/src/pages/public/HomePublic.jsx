@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 import Header from "../../components/header/Header";
 import SideBarPublic from "../../components/navbar/SideBarPublic";
 import SelectSortPublic from "../../components/select/SelectSortPublic";
@@ -6,7 +6,7 @@ import CardProduct from "../../components/card/CardProduct";
 
 function HomePublic() {
     return (
-        <div className="bg-body-secondary">
+        <div className="bg-body-secondary" style={{ height: '100vh' }}>
             <div className="container">
                 <Header title={`Icon Laptop`} />
 

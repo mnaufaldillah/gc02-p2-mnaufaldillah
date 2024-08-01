@@ -1,14 +1,12 @@
 import PropTypes from 'prop-types';
 import { useState } from "react";
 import axios from "../../config/axiosinstance";
-import { useNavigate } from "react-router-dom";
 
 function SideBarPublic({ dataCategories, setProducts,  }) {
     const [search, setSearch] = useState('')
     const [categoryId, setCategoryId] = useState('');
     const [errors, setErrors] = useState('');
     const [loading, setLoading] = useState(false);
-    const navigate = useNavigate();
 
     async function handlerSearch(event) {
         try {

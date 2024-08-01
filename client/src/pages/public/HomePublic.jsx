@@ -48,6 +48,8 @@ function HomePublic() {
         }
     }
 
+    console.log(products, `<--------`);
+
     useEffect(() => {
         fetchPublicProducts();
         fetchPublicCategories();

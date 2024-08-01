@@ -20,7 +20,26 @@ function SideBarPublic({ dataCategories, setProducts,  }) {
                 method: 'GET'
             });
 
-            setProducts(data);
+            setProducts(data.products);
+        } catch (error) {
+            setErrors(error.response.data.message)
+            console.log(errors);
+        } finally {
+            setLoading(false)
+        }
+    }
+
+    async function handlerFilter(event) {
+        try {
+            event.preventDefault();
+            setLoading(true);
+
+            const { data } = await axios({
+                url: `/pub/products?categoryId=${categoryId}`,
+                method: 'GET'
+            });
+
+            setProducts(data.products);
         } catch (error) {
             setErrors(error.response.data.message)
             console.log(errors);
@@ -50,10 +69,16 @@ function SideBarPublic({ dataCategories, setProducts,  }) {
                 </form>
             </div>
             <div className="p-3">
-                <form action="" method="get">
+                <form onSubmit={handlerFilter}>
                     <div className="p-1">
                         <label htmlFor="categoryId">Kategori Laptop</label>
-                        <select name="categoryId" id="categoryId" className="form-select">
+                        <select 
+                            name="categoryId" 
+                            id="categoryId" 
+                            className="form-select"
+                            value={categoryId} 
+                            onChange={(event) => setCategoryId(event.target.value)}
+                        >
                             {dataCategories.map((item) => {
                                 return (
                                     <option  key={item.id} value={item.id}>{item.name}</option>

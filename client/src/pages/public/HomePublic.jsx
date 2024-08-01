@@ -23,7 +23,7 @@ function HomePublic() {
             // console.log(data.products);
             setProducts(data.products);
         } catch (error) {
-            setErrors(error.response.data.message)
+            setErrors(error.response.data.message);
             console.log(errors);
         } finally {
             setLoading(false);
@@ -67,7 +67,7 @@ function HomePublic() {
                     </div>
                     
                     <div className="col-9">
-                        <SelectSortPublic />
+                        <SelectSortPublic setProducts={setProducts} />
 
                         <div className="row p-3">
                             {products.map((item) => {

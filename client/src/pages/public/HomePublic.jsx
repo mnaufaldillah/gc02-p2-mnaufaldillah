@@ -5,6 +5,7 @@ import SelectSortPublic from "../../components/select/SelectSortPublic";
 import CardProduct from "../../components/card/CardProduct";
 import { useEffect, useState } from "react";
 import axios from "../../config/axiosinstance";
+import Pagination from "../../components/pagination/Pagination";
 
 function HomePublic() {
     const [products, setProducts] = useState([]);
@@ -75,6 +76,10 @@ function HomePublic() {
                                     <CardProduct dataDetail={item} key={item.id}/>
                                 )
                             })}
+                        </div>
+
+                        <div className="p-3 d-flex justify-content-center">
+                            <Pagination />
                         </div>
                     </div>
                 </div>

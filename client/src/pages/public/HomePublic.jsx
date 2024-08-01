@@ -5,13 +5,15 @@ import SelectSortPublic from "../../components/select/SelectSortPublic";
 import CardProduct from "../../components/card/CardProduct";
 import { useEffect, useState } from "react";
 import axios from "../../config/axiosinstance";
-import Pagination from "../../components/pagination/Pagination";
+import PaginationPublic from "../../components/pagination/PaginationPublic";
 
 function HomePublic() {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [errors, setErrors] = useState('');
     const [categories, setCategories] = useState([]);
+    const [page, setPage] = useState('');
+    const [totalPage, setTotalPage] = useState('');
 
     async function fetchPublicProducts() {
         try {
@@ -23,6 +25,8 @@ function HomePublic() {
             });
             // console.log(data.products);
             setProducts(data.products);
+            setPage(data.page);
+            setTotalPage(data.totalPage);
         } catch (error) {
             setErrors(error.response.data.message);
             console.log(errors);
@@ -79,7 +83,7 @@ function HomePublic() {
                         </div>
 
                         <div className="p-3 d-flex justify-content-center">
-                            <Pagination />
+                            <PaginationPublic setProducts={setProducts} page={page} setPage={setPage} totalPage={totalPage} />
                         </div>
                     </div>
                 </div>

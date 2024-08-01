@@ -1,23 +1,25 @@
-import Button from "../button/Button"
+import Button from "../button/Button";
+import PropTypes from 'prop-types';
+import { Link } from "react-router-dom";
 
-function TableProduct() {
-    const products = [
-        {
-            id: 1,
-            name: 'HP Pavilion Aero',
-            price: 15000000,
-            stock: 5,
-            imageUrl: `https://id-media.apjonlinecdn.com/catalog/product/cache/74c1057f7991b4edb2bc7bdaa94de933/c/0/c08964442_1.png`,
-            Category: {
-                id: 1,
-                name: `Iconic Laptop`
-            },
-            User: {
-                id: 1,
-                name: `Naufaldillah123`
-            }
-        }
-    ]
+function TableProduct({dataProducts, fetchProducts}) {
+    // const products = [
+    //     {
+    //         id: 1,
+    //         name: 'HP Pavilion Aero',
+    //         price: 15000000,
+    //         stock: 5,
+    //         imageUrl: `https://id-media.apjonlinecdn.com/catalog/product/cache/74c1057f7991b4edb2bc7bdaa94de933/c/0/c08964442_1.png`,
+    //         Category: {
+    //             id: 1,
+    //             name: `Iconic Laptop`
+    //         },
+    //         User: {
+    //             id: 1,
+    //             name: `Naufaldillah123`
+    //         }
+    //     }
+    // ]
 
     return (
         <div className="mb-3 formula1-regular">
@@ -35,23 +37,24 @@ function TableProduct() {
                     </tr>
                 </thead>
                 <tbody>
-                    {products.map((item, index) => {
+                    {dataProducts.map((item, index) => {
                         return (
                             <tr key={item.id}>
                                 <td>{index + 1}</td>
                                 <td>{item.name}</td>
                                 <td>{item.price}</td>
                                 <td>{item.stock}</td>
-                                <td><img src={item.imageUrl} alt="" width="100" /></td>
+                                <td><img src={item.imgUrl} alt="Gambar Produk" width="100" /></td>
                                 <td>{item.Category.name}</td>
                                 <td>{item.User.name}</td>
                                 <td className="justify-content-between">
-                                    <a href="">
+                                    <Link to={`/admin/products/${item.id}/edit`}>
                                         <Button commandType={`EditProduct`}/>
-                                    </a>
-                                    <a href="">
-                                        <Button commandType={`DeleteProduct`}/>
-                                    </a>
+                                    </Link>
+                                    <Link to={`/admin/products/${item.id}/upload-image`}>
+                                        <Button commandType={`UploadImage`}/>
+                                    </Link>
+                                    <Button commandType={`DeleteProduct`} productId={item.id} fetchProducts={fetchProducts}/>
                                 </td>
                             </tr>
                         )
@@ -60,6 +63,11 @@ function TableProduct() {
             </table>
         </div>
     )
+}
+
+TableProduct.propTypes = {
+    dataProducts: PropTypes.array,
+    fetchProducts: PropTypes.func
 }
 
 export default TableProduct;

@@ -1,9 +1,44 @@
+import { useEffect, useState } from "react";
 import Button from "../../components/button/Button";
 import Header from "../../components/header/Header";
 import TableProduct from "../../components/table/TableProduct";
 import { Link } from "react-router-dom";
+import axios from "../../config/axiosinstance";
 
 function HomeAdmin() {
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [errors, setErrors] = useState('');
+
+    async function fetchProducts() {
+        try {
+            setLoading(true);
+
+            // console.log(localStorage);
+
+            const { data } = await axios({
+                url: '/products',
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${localStorage.access_token}`
+                }
+            });
+
+            // console.log(data);
+            setProducts(data);
+        } catch (error) {
+            setErrors(error.response.data.message)
+            console.log(errors);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        fetchProducts();
+        // console.log('Public Product Mounted');
+    }, []);
+
     return (
         <div className="bg-body-secondary"  style={{ height: '100vh' }}>
             
@@ -16,7 +51,7 @@ function HomeAdmin() {
                     </Link>
                 </div>
 
-                <TableProduct />
+                <TableProduct dataProducts={products} fetchProducts={fetchProducts} />
             </div>
         </div>
     )

@@ -57,7 +57,7 @@ const router = createBrowserRouter ([
                 element: <CreateProductAdmin />
             },
             {
-                path: 'produtcs/:id/edit',
+                path: 'products/:id/edit',
                 element: <EditProductAdmin />
             },
             {

@@ -1,4 +1,6 @@
-function SideBarPublic() {
+import PropTypes from 'prop-types';
+
+function SideBarPublic({ dataCategories }) {
     return (
         <div className="p-3 bg-light">
             <div className="p-3">
@@ -17,9 +19,11 @@ function SideBarPublic() {
                     <div className="p-1">
                         <label htmlFor="categoryId">Kategori Laptop</label>
                         <select name="categoryId" id="categoryId" className="form-select">
-                            <option value="1">Legendary Gaming Laptop</option>
-                            <option value="2">Iconic Gaming Laptop</option>
-                            <option value="3">Memorable Gaming Laptop</option>
+                            {dataCategories.map((item) => {
+                                return (
+                                    <option  key={item.id} value={item.id}>{item.name}</option>
+                                )
+                            })}
                         </select>
                     </div>
                     <div className="p-1">
@@ -29,6 +33,10 @@ function SideBarPublic() {
             </div>
         </div>
     )
+}
+
+SideBarPublic.propTypes = {
+    dataCategories: PropTypes.array
 }
 
 export default SideBarPublic;

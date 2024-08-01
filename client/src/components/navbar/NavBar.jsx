@@ -39,6 +39,11 @@ function NavBar() {
                         </li>
                         <li className="nav-item">
                             <Link to='/admin/add-user' className="nav-link">
+                                Buat User Baru
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to='/admin/categories' className="nav-link">
                                 Kategori
                             </Link>
                         </li>

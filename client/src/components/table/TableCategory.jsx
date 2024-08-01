@@ -1,11 +1,11 @@
+import PropTypes from 'prop-types';
 
-
-function TableCategory() {
-    const categories = [
-        { id: 1, name: `Legendary Gaming Laptop` },
-        { id: 2, name: `Iconic Gaming Laptop` },
-        { id: 3, name: `Memorable Gaming Laptop` }
-    ]
+function TableCategory({dataCategories}) {
+    // const categories = [
+    //     { id: 1, name: `Legendary Gaming Laptop` },
+    //     { id: 2, name: `Iconic Gaming Laptop` },
+    //     { id: 3, name: `Memorable Gaming Laptop` }
+    // ]
 
     return (
         <div className="mb-3 formula1-regular">
@@ -17,7 +17,7 @@ function TableCategory() {
                     </tr>
                 </thead>
                 <tbody>
-                    {categories.map((item, index) => {
+                    {dataCategories.map((item, index) => {
                         return (
                             <tr key={item.id}>
                                 <td>{index + 1}</td>
@@ -29,6 +29,10 @@ function TableCategory() {
             </table>
         </div>
     )
+}
+
+TableCategory.propTypes = {
+    dataCategories: PropTypes.array
 }
 
 export default TableCategory;

@@ -6,11 +6,13 @@ function FormLogin() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState('');
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     async function handlerLogin(event) {
         try {
             event.preventDefault();
+            setLoading(true);
 
             const { data } = await axios({
                 url: '/login',
@@ -21,13 +23,15 @@ function FormLogin() {
                 }
             })
 
-            console.log(data.acces_token);
+            // console.log(data.access_token);
 
-            localStorage.setItem('access_token', data.acces_token);
+            localStorage.setItem('access_token', data.access_token);
             navigate('/admin/products')
         } catch (error) {
             setErrors(error.response.data.message)
             console.log(errors);
+        } finally {
+            setLoading(false);
         }
     }
 

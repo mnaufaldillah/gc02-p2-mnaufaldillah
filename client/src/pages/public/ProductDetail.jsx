@@ -15,11 +15,13 @@ function ProductDetail() {
         try {
             setLoading(true);
 
+            // console.log(id, `<-------------`);
+
             const { data } = await axios({
-                url: '/pub/products/' + id,
+                url: `/pub/products/${id}`,
                 method: 'GET',
             });
-            // console.log(data);
+            console.log(data);
             setProduct(data);
         } catch (error) {
             setErrors(error.response.data.message)

@@ -21,16 +21,18 @@ function CardProductDetail({dataDetail}) {
     // };
     // console.log(dataDetail);
 
+    // console.log(dataDetail, `<--------------`);
+
     return (
         <div className="mb-3 p-3 formula1-regular">
             <div className="row p-3 bg-light">
                 <div className="col">
-                    <img src={dataDetail.name} alt="Gambar Produk" className="johnLewis-image-large" width="640" height="853" />
+                    <img src={dataDetail.imgUrl} alt="Gambar Produk" className="johnLewis-image-large" width="640" height="853" />
                 </div>
                 <div className="col">
                     <h5>{dataDetail.name}</h5>
                     <h5>{dataDetail.price}</h5>
-                    <h6>Kategori: {dataDetail.Category.name}</h6>
+                    <h6>Kategori: {dataDetail.Category?.name}</h6>
                     <br />
                     <br />
                     <h5>Deskripsi Produk</h5>

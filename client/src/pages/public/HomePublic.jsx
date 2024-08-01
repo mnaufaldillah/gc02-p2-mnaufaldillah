@@ -10,6 +10,7 @@ function HomePublic() {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [errors, setErrors] = useState('');
+    const [categories, setCategories] = useState([]);
 
     async function fetchPublicProducts() {
         try {
@@ -29,8 +30,27 @@ function HomePublic() {
         }
     }
 
+    async function fetchPublicCategories() {
+        try {
+            setLoading(true);
+
+            const { data } = await axios({
+                url: '/pub/categories',
+                method: 'GET',
+            });
+            // console.log(data);
+            setCategories(data);
+        } catch (error) {
+            setErrors(error.response.data.message)
+            console.log(errors);
+        } finally {
+            setLoading(false);
+        }
+    }
+
     useEffect(() => {
         fetchPublicProducts();
+        fetchPublicCategories();
         // console.log('Public Product Mounted');
     }, [])
 
@@ -41,7 +61,7 @@ function HomePublic() {
 
                 <div className="mb-3 p-3 row d-flex justify-content-between formula1-regular">
                     <div className="col-3">
-                        <SideBarPublic />
+                        <SideBarPublic dataCategories={categories} />
                     </div>
                     
                     <div className="col-9">

@@ -61,7 +61,7 @@ function HomePublic() {
 
                 <div className="mb-3 p-3 row d-flex justify-content-between formula1-regular">
                     <div className="col-3">
-                        <SideBarPublic dataCategories={categories} />
+                        <SideBarPublic dataCategories={categories} setProducts={setProducts} />
                     </div>
                     
                     <div className="col-9">

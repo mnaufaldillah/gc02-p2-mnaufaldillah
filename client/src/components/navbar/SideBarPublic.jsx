@@ -1,13 +1,48 @@
 import PropTypes from 'prop-types';
+import { useState } from "react";
+import axios from "../../config/axiosinstance";
+import { useNavigate } from "react-router-dom";
 
-function SideBarPublic({ dataCategories }) {
+function SideBarPublic({ dataCategories, setProducts,  }) {
+    const [search, setSearch] = useState('')
+    const [categoryId, setCategoryId] = useState('');
+    const [errors, setErrors] = useState('');
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
+
+    async function handlerSearch(event) {
+        try {
+            event.preventDefault();
+            setLoading(true);
+
+            const { data } = await axios({
+                url: `/pub/products?search=${search}`,
+                method: 'GET'
+            });
+
+            setProducts(data);
+        } catch (error) {
+            setErrors(error.response.data.message)
+            console.log(errors);
+        } finally {
+            setLoading(false)
+        }
+    }
+
     return (
         <div className="p-3 bg-light">
             <div className="p-3">
-                <form action="" method="get">
+                <form onSubmit={handlerSearch}>
                     <div className="p-1">
                         <label htmlFor="search">Search</label>
-                        <input type="text" name="search" id="search" className="form-control form-control-sm" />
+                        <input 
+                            type="text" 
+                            name="search" 
+                            id="search" 
+                            className="form-control form-control-sm" 
+                            defaultValue={search} 
+                            onChange={(event) => setSearch(event.target.value)}
+                        />
                     </div>
                     <div className="p-1">
                         <button type="submit" className="btn btn-dark btn-sm">Search</button>
@@ -36,7 +71,8 @@ function SideBarPublic({ dataCategories }) {
 }
 
 SideBarPublic.propTypes = {
-    dataCategories: PropTypes.array
+    dataCategories: PropTypes.array,
+    setProducts: PropTypes.func
 }
 
 export default SideBarPublic;

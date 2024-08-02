@@ -12,8 +12,8 @@ function HomePublic() {
     const [loading, setLoading] = useState(false);
     const [errors, setErrors] = useState('');
     const [categories, setCategories] = useState([]);
-    const [page, setPage] = useState('');
-    const [totalPage, setTotalPage] = useState('');
+    const [page, setPage] = useState(1);
+    const [totalPage, setTotalPage] = useState(1);
 
     async function fetchPublicProducts() {
         try {

@@ -34,6 +34,14 @@ function FormLogin() {
             setLoading(false);
         }
     }
+    
+    function showError(message) {
+        if (message) {
+            return <p>message</p>
+        }
+
+        return null;
+    }
 
     return (
         <div className="d-flex justify-content-center">

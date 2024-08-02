@@ -9,7 +9,7 @@ function FormUser() {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [address, setAddress] = useState('');
     const [errors, setErrors] = useState('');
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     async function handlerUser(event) {

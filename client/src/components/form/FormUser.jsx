@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "../../config/axiosinstance";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function FormUser() {
     const [username, setUsername] = useState('');
@@ -17,7 +18,7 @@ function FormUser() {
             event.preventDefault();
             setLoading(true)
 
-            const { data } = await axios({
+            await axios({
                 url: '/add-user',
                 method: 'POST',
                 headers: {
@@ -37,6 +38,13 @@ function FormUser() {
         } catch (error) {
             setErrors(error.response.data.message)
             console.log(errors);
+
+            Swal.fire({
+                title: 'Error.',
+                text: error.response.data.message,
+                icon: 'error',
+                confirmButtonText: 'Lanjut'
+            });
         } finally {
             setLoading(false)
         }

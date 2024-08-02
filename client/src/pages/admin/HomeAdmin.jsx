@@ -4,6 +4,7 @@ import Header from "../../components/header/Header";
 import TableProduct from "../../components/table/TableProduct";
 import { Link } from "react-router-dom";
 import axios from "../../config/axiosinstance";
+import Swal from "sweetalert2";
 
 function HomeAdmin() {
     const [products, setProducts] = useState([]);
@@ -29,6 +30,13 @@ function HomeAdmin() {
         } catch (error) {
             setErrors(error.response.data.message)
             console.log(errors);
+
+            Swal.fire({
+                title: 'Error.',
+                text: error.response.data.message,
+                icon: 'error',
+                confirmButtonText: 'Lanjut'
+            });
         } finally {
             setLoading(false);
         }

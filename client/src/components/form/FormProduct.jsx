@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from "react";
 import axios from "../../config/axiosinstance";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function FormProduct({dataEditProduct, dataCategories, commandType}) {
     // const categories = [
@@ -38,7 +39,7 @@ function FormProduct({dataEditProduct, dataCategories, commandType}) {
             setLoading(true);
 
             if(commandType === 'create') {
-                const { data } = await axios({
+                await axios({
                     url: '/products',
                     method: 'POST',
                     headers: {
@@ -56,7 +57,7 @@ function FormProduct({dataEditProduct, dataCategories, commandType}) {
 
                 navigate('/admin/products')
             } else if(commandType === 'edit') {
-                const { data } = await axios({
+                await axios({
                     url: `/products/${dataEditProduct.id}`,
                     method: 'PUT',
                     headers: {
@@ -80,6 +81,13 @@ function FormProduct({dataEditProduct, dataCategories, commandType}) {
         } catch (error) {
             setErrors(error.response.data.message)
             console.log(errors);
+
+            Swal.fire({
+                title: 'Error.',
+                text: error.response.data.message,
+                icon: 'error',
+                confirmButtonText: 'Lanjut'
+            });
         } finally {
             setLoading(false);
         }

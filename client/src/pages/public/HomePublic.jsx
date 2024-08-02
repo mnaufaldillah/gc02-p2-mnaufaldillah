@@ -6,6 +6,7 @@ import CardProduct from "../../components/card/CardProduct";
 import { useEffect, useState } from "react";
 import axios from "../../config/axiosinstance";
 import PaginationPublic from "../../components/pagination/PaginationPublic";
+import Swal from "sweetalert2";
 
 function HomePublic() {
     const [products, setProducts] = useState([]);
@@ -30,6 +31,13 @@ function HomePublic() {
         } catch (error) {
             setErrors(error.response.data.message);
             console.log(errors);
+
+            Swal.fire({
+                title: 'Error.',
+                text: error.response.data.message,
+                icon: 'error',
+                confirmButtonText: 'Lanjut'
+            });
         } finally {
             setLoading(false);
         }
@@ -48,12 +56,19 @@ function HomePublic() {
         } catch (error) {
             setErrors(error.response.data.message)
             console.log(errors);
+
+            Swal.fire({
+                title: 'Error.',
+                text: error.response.data.message,
+                icon: 'error',
+                confirmButtonText: 'Lanjut'
+            });
         } finally {
             setLoading(false);
         }
     }
 
-    console.log(products, `<--------`);
+    // console.log(products, `<--------`);
 
     useEffect(() => {
         fetchPublicProducts();

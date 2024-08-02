@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import axios from "../../config/axiosinstance";
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 function SelectSortPublic({ setProducts }) {
     const [loading, setLoading] = useState(false);
@@ -19,6 +20,13 @@ function SelectSortPublic({ setProducts }) {
         } catch (error) {
             setErrors(error.response.data.message);
             console.log(errors);
+
+            Swal.fire({
+                title: 'Error.',
+                text: error.response.data.message,
+                icon: 'error',
+                confirmButtonText: 'Lanjut'
+            });
         } finally {
             setLoading(false);
         }
@@ -37,6 +45,13 @@ function SelectSortPublic({ setProducts }) {
         } catch (error) {
             setErrors(error.response.data.message);
             console.log(errors);
+
+            Swal.fire({
+                title: 'Error.',
+                text: error.response.data.message,
+                icon: 'error',
+                confirmButtonText: 'Lanjut'
+            });
         } finally {
             setLoading(false);
         }

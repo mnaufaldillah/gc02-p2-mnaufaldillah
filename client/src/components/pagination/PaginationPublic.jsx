@@ -1,12 +1,13 @@
 import PropTypes from "prop-types";
 import axios from "../../config/axiosinstance";
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 function PaginationPublic({ setProducts, page, setPage, totalPage }) {
     const [loading, setLoading] = useState(false);
     const [errors, setErrors] = useState('');
 
-    console.log(typeof page, '<-----------');
+    // console.log(typeof page, '<-----------');
 
     async function handlerPage(numberPage) {
         try {
@@ -23,6 +24,13 @@ function PaginationPublic({ setProducts, page, setPage, totalPage }) {
         } catch (error) {
             setErrors(error.response.data.message);
             console.log(errors);
+
+            Swal.fire({
+                title: 'Error.',
+                text: error.response.data.message,
+                icon: 'error',
+                confirmButtonText: 'Lanjut'
+            });
         } finally {
             setLoading(false);
         }
@@ -40,7 +48,7 @@ function PaginationPublic({ setProducts, page, setPage, totalPage }) {
 
         for(let i = renderStartPoint; i <= renderEndPoint; i++) {
             arr.push(
-                <li className="page-item">
+                <li className="page-item" key={i}>
                     <button className="page-link" onClick={ () => handlerPage(i) }>
                         {i}
                     </button>
@@ -61,14 +69,14 @@ function PaginationPublic({ setProducts, page, setPage, totalPage }) {
                 </li> */}
 
                 { page !== 1 ? 
-                <li className="page-item">
+                <li className="page-item" key={page - 1}>
                     <button className="page-link" href="#" aria-label="Next" onClick={() => handlerPage(page - 1)}>
                         <span aria-hidden="true">«</span>
                     </button>
                 </li> 
                 : 
-                <li className="page-item disabled">
-                    <button disabled className="page-link" href="#" aria-label="Next" onClick={() => handlerPage(page - 1)}>
+                <li className="page-item disabled" key={page - 1}>
+                    <button disabled className="page-link" href="#" aria-label="Next" onClick={() => handlerPage(page - 1)} >
                         <span aria-hidden="true">«</span>
                     </button>
                 </li>
@@ -77,13 +85,13 @@ function PaginationPublic({ setProducts, page, setPage, totalPage }) {
                 {renderPagination()}
 
                 { page !== totalPage ? 
-                <li className="page-item">
+                <li className="page-item" key={page + 1}>
                     <button className="page-link" href="#" aria-label="Next" onClick={() => handlerPage(page + 1)}>
                         <span aria-hidden="true">»</span>
                     </button>
                 </li> 
                 : 
-                <li className="page-item disabled">
+                <li className="page-item disabled" key={page + 1}>
                     <button disabled className="page-link" href="#" aria-label="Next" onClick={() => handlerPage(page + 1)}>
                         <span aria-hidden="true">»</span>
                     </button>

@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import axios from "../../config/axiosinstance";
 import { useState } from 'react';
+import Swal from "sweetalert2";
 function Button({commandType, productId, fetchProducts}) {
     const [errors, setErrors] = useState('');
     const [loading, setLoading] = useState(false);
@@ -24,6 +25,13 @@ function Button({commandType, productId, fetchProducts}) {
         } catch (error) {
             setErrors(error.response.data.message)
             console.log(errors);
+
+            Swal.fire({
+                title: 'Error.',
+                text: error.response.data.message,
+                icon: 'error',
+                confirmButtonText: 'Lanjut'
+            });
         } finally {
             setLoading(false)
         }

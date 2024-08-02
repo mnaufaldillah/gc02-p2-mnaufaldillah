@@ -3,6 +3,7 @@ import FormProduct from "../../components/form/FormProduct";
 import Header from "../../components/header/Header";
 import axios from "../../config/axiosinstance";
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 function CreateProductAdmin() {
     const [categories, setCategories] = useState([]);
@@ -26,6 +27,13 @@ function CreateProductAdmin() {
         } catch (error) {
             setErrors(error.response.data.message)
             console.log(errors);
+
+            Swal.fire({
+                title: 'Error.',
+                text: error.response.data.message,
+                icon: 'error',
+                confirmButtonText: 'Lanjut'
+            });
         } finally {
             setLoading(false);
         }

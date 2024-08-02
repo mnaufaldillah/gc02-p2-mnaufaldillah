@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "../../config/axiosinstance";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function FormLogin() {
     const [email, setEmail] = useState('');
@@ -26,21 +27,20 @@ function FormLogin() {
             // console.log(data.access_token);
 
             localStorage.setItem('access_token', data.access_token);
-            navigate('/admin/products')
+            navigate('/admin/products');
         } catch (error) {
             setErrors(error.response.data.message)
             console.log(errors);
+
+            Swal.fire({
+                title: 'Error.',
+                text: error.response.data.message,
+                icon: 'error',
+                confirmButtonText: 'Lanjut'
+            });
         } finally {
             setLoading(false);
         }
-    }
-    
-    function showError(message) {
-        if (message) {
-            return <p>message</p>
-        }
-
-        return null;
     }
 
     return (
